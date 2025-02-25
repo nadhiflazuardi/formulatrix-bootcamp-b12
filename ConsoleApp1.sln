@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{CFAA3E63-3FD1-488A-B3ED-138B9FF91610}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "array-iteration-selection", "array-iteration-selection\array-iteration-selection.csproj", "{C9C5A018-3F76-488C-AEB8-DCB5805FBD3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foobar", "foobar\foobar.csproj", "{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{CFAA3E63-3FD1-488A-B3ED-138B9FF91610}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFAA3E63-3FD1-488A-B3ED-138B9FF91610}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFAA3E63-3FD1-488A-B3ED-138B9FF91610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9C5A018-3F76-488C-AEB8-DCB5805FBD3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9C5A018-3F76-488C-AEB8-DCB5805FBD3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9C5A018-3F76-488C-AEB8-DCB5805FBD3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9C5A018-3F76-488C-AEB8-DCB5805FBD3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

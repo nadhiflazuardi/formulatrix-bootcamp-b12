@@ -1,0 +1,15 @@
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\bin\Debug\net8.0\array-iteration-selection.exe
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\bin\Debug\net8.0\array-iteration-selection.deps.json
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\bin\Debug\net8.0\array-iteration-selection.runtimeconfig.json
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\bin\Debug\net8.0\array-iteration-selection.dll
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\bin\Debug\net8.0\array-iteration-selection.pdb
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.AssemblyInfoInputs.cache
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.AssemblyInfo.cs
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.csproj.CoreCompileInputs.cache
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.sourcelink.json
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.dll
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\refint\array-iteration-selection.dll
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.pdb
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\array-iteration-selection.genruntimeconfig.cache
+C:\Users\Batch 12\Documents\C# Projects\array-iteration-selection\obj\Debug\net8.0\ref\array-iteration-selection.dll
