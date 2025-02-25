@@ -2,16 +2,16 @@
 bin/
 obj/
 
-# Ignore package-related files
-packages/
-*.nupkg
-project.lock.json
-
-# Ignore DLLs and PDBs
+# Ignore compiled files
 *.dll
+*.exe
 *.pdb
 
-# Ignore user-specific files
+# Ignore cache and debug files
+*.cache
+*.sourcelink.json
+
+# Ignore user-specific and temporary files
 *.user
 *.suo
-*.vs/
+.vs/
