@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foobar", "foobar\foobar.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinFlip", "CoinFlip\CoinFlip.csproj", "{FA13A292-FFC2-4D17-A518-BD81D2853D7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnBasedConsoleGame", "TurnBasedConsoleGame\TurnBasedConsoleGame.csproj", "{185DF7BB-3C0B-426D-9566-2F84BFE2E96C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors", "RockPaperScissors\RockPaperScissors.csproj", "{88B5DCCB-6D41-4D78-9637-A18D51CD66D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{FA13A292-FFC2-4D17-A518-BD81D2853D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA13A292-FFC2-4D17-A518-BD81D2853D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA13A292-FFC2-4D17-A518-BD81D2853D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{185DF7BB-3C0B-426D-9566-2F84BFE2E96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185DF7BB-3C0B-426D-9566-2F84BFE2E96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185DF7BB-3C0B-426D-9566-2F84BFE2E96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185DF7BB-3C0B-426D-9566-2F84BFE2E96C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B5DCCB-6D41-4D78-9637-A18D51CD66D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B5DCCB-6D41-4D78-9637-A18D51CD66D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B5DCCB-6D41-4D78-9637-A18D51CD66D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B5DCCB-6D41-4D78-9637-A18D51CD66D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
