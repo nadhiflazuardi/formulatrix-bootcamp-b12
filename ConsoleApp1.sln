@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "array-iteration-selection",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foobar", "foobar\foobar.csproj", "{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinFlip", "CoinFlip\CoinFlip.csproj", "{FA13A292-FFC2-4D17-A518-BD81D2853D7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA13A292-FFC2-4D17-A518-BD81D2853D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA13A292-FFC2-4D17-A518-BD81D2853D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA13A292-FFC2-4D17-A518-BD81D2853D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA13A292-FFC2-4D17-A518-BD81D2853D7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

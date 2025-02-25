@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("array-iteration-selection")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52467537f4453cf77a1311497a982784c46e065c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4515b2a2c429199239feee767a67ecfe89d05c7")]
 [assembly: System.Reflection.AssemblyProductAttribute("array-iteration-selection")]
 [assembly: System.Reflection.AssemblyTitleAttribute("array-iteration-selection")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
