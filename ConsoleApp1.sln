@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{CFAA3E63-3FD1-488A-B3ED-138B9FF91610}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "Day 1\ConsoleApp1\ConsoleApp1.csproj", "{CFAA3E63-3FD1-488A-B3ED-138B9FF91610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "array-iteration-selection", "array-iteration-selection\array-iteration-selection.csproj", "{C9C5A018-3F76-488C-AEB8-DCB5805FBD3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "array-iteration-selection", "MicrosoftCourse\array-iteration-selection\array-iteration-selection.csproj", "{C9C5A018-3F76-488C-AEB8-DCB5805FBD3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foobar", "foobar\foobar.csproj", "{638BC88B-A13A-4DE3-A581-D882A6DA5BBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinFlip", "CoinFlip\CoinFlip.csproj", "{FA13A292-FFC2-4D17-A518-BD81D2853D7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnBasedConsoleGame", "Day 2\TurnBasedConsoleGame\TurnBasedConsoleGame.csproj", "{185DF7BB-3C0B-426D-9566-2F84BFE2E96C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnBasedConsoleGame", "TurnBasedConsoleGame\TurnBasedConsoleGame.csproj", "{185DF7BB-3C0B-426D-9566-2F84BFE2E96C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors", "Day 2\RockPaperScissors\RockPaperScissors.csproj", "{88B5DCCB-6D41-4D78-9637-A18D51CD66D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors", "RockPaperScissors\RockPaperScissors.csproj", "{88B5DCCB-6D41-4D78-9637-A18D51CD66D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberGuessingGame", "Day 3\NumberGuessingGame\NumberGuessingGame.csproj", "{172BF27E-71B7-4577-A3B5-76093631D44A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberGuessingGame", "NumberGuessingGame\NumberGuessingGame.csproj", "{172BF27E-71B7-4577-A3B5-76093631D44A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day 3", "Day 3", "{85F0B5E8-0692-4885-91FF-75D52CD47993}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBankApp", "Day 3\SimpleBankApp\SimpleBankApp.csproj", "{1F9BDA6B-0D21-40BA-BA7A-F3820590473A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,5 +56,12 @@ Global
 		{172BF27E-71B7-4577-A3B5-76093631D44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{172BF27E-71B7-4577-A3B5-76093631D44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{172BF27E-71B7-4577-A3B5-76093631D44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F9BDA6B-0D21-40BA-BA7A-F3820590473A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F9BDA6B-0D21-40BA-BA7A-F3820590473A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F9BDA6B-0D21-40BA-BA7A-F3820590473A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F9BDA6B-0D21-40BA-BA7A-F3820590473A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1F9BDA6B-0D21-40BA-BA7A-F3820590473A} = {85F0B5E8-0692-4885-91FF-75D52CD47993}
 	EndGlobalSection
 EndGlobal
