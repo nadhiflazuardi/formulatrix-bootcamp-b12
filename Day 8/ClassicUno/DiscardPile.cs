@@ -1,0 +1,5 @@
+namespace ClassicUno;
+
+class DiscardPile {
+  
+}
