@@ -3,7 +3,29 @@ title: Classic Uno Class Diagram
 ---
 classDiagram
 direction TB
+    class IPlayer {
+        -int Id
+        -string Name
+        +setName()
+        +getName()
+    }
+    <<interface>> IPlayer
+
+    class ICard {
+        +string Color
+        +string Value
+    }
+    <<interface>> ICard
+
+    class IActionCard {
+	    +string Effect
+    }
+    <<interface>> IActionCard
+
     class GameController {
+        -List<.Card> _drawableCards
+        -List<.Card> _discardedCards
+        -Dictionary<.Player, List<.Card>> _cardInHands
 	    +int RoundCount
 	    -List~.Player~ _players
 	    -Player _currentPlayer
@@ -53,29 +75,28 @@ direction TB
     class Card {
 	    +string Color: readonly
 	    +string Value: readonly
+        +string Score: readonly
         +Card(string color, string value)
     }
     class RegularCard {
-	    +OnPlay(Player player): bool
+	    +string Effect
     }
     class ReverseCard {
-	    +OnPlay(Player player): bool
+	    +string Effect
     }
     class DrawTwoCard {
-	    +OnPlay(Player player): bool
+	    +string Effect
     }
     class DrawFourCard {
-	    +OnPlay(Player player): bool
+	    +string Effect
     }
     class SkipCard {
-	    +OnPlay(Player player): bool
+	    +string Effect
     }
     class WildCard {
-	    +OnPlay(Player player): bool
+	    +string Effect
     }
-    class IActionCard {
-	    +OnPlay(Player player): bool
-    }
+
     class CardScore {
 	    DrawTwo = 20,
 	    Skip = 20,
@@ -87,6 +108,17 @@ direction TB
 	    number2 = 2,
 	    ...
     }
+	<<enum>> CardScore
+
+    class Color {
+        Red,
+        Green,
+        Blue,
+        Yellow,
+        Wild
+    }
+    <<enum>> Color
+
     class Player {
 	    +int Id: readonly
 	    +string Name: readonly
@@ -105,8 +137,6 @@ direction TB
     }
 
 	<<abstract>> Card
-	<<interface>> IActionCard
-	<<enum>> CardScore
 
     IActionCard <|.. ReverseCard
     IActionCard <|.. SkipCard
@@ -114,16 +144,23 @@ direction TB
     IActionCard <|.. DrawTwoCard
     IActionCard <|.. DrawFourCard
 
-    IDeck <|-- Deck
+    ICard <|-- Card
+    ICard <|-- GameController
+
+    IPlayer <|-- Player
+    IPlayer <|-- GameController
 
     Card <|-- DrawTwoCard
     Card <|-- RegularCard
     Card <|-- ReverseCard
     Card <|-- SkipCard
     Card <|-- WildCard
-    Card *-- CardScore
+    Card --> CardScore
+    Card --> Color
+
     GameController <-- DrawPile
     GameController <-- DiscardPile
+
     Player "1" o-- "n" Card
-    Player --> GameController
+
     WildCard <|-- DrawFourCard
