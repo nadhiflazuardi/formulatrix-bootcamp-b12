@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Program.cs" />
+    <Content Include="Interfaces.cs" />
+    <Content Include="Position.cs" />
+    <Content Include="GameController.cs" />
+    <Content Include="Player.cs" />
+    <Content Include="Display.cs" />
+    <Content Include="Enums.cs" />
+    <Content Include="Board.cs" />
+    <Content Include="Piece.cs" />
+  </ItemGroup>
+</Project>
