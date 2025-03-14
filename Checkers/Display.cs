@@ -12,6 +12,7 @@ public class Display {
   public void DisplayBoard(int Size, Piece[,] Pieces)
   {
     Console.Clear();
+    Console.WriteLine("\n\n");
     string header = " ";
     for (int i = 0; i < Size; i++)
     {
@@ -36,12 +37,10 @@ public class Display {
           Console.Write(row + 1 + " ");
         }
 
-        char pieceSymbol;
-        if (Pieces[row, col] == null)
-        {
-          pieceSymbol = ' ';
-        }
-        else
+        char pieceSymbol = ' ';
+        bool isKing = false;
+
+        if (Pieces[row, col] != null)
         {
           if (Pieces[row, col].PieceColor == PieceColor.White)
           {
@@ -51,8 +50,20 @@ public class Display {
           {
             pieceSymbol = 'O';
           }
+
+          isKing = Pieces[row, col].IsKing; // Check IsKing only if not null
         }
-        Console.Write(BoardVerticalSymbol + pieceSymbol + ' ');
+
+        Console.Write(BoardVerticalSymbol);
+
+        // Change color to red if it's a King
+        if (isKing)
+        {
+          Console.ForegroundColor = ConsoleColor.Red;
+        }
+
+        Console.Write(pieceSymbol + " ");
+        Console.ResetColor(); // Reset to default color
       }
 
       Console.Write("|\n");

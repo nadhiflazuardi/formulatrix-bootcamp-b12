@@ -11,6 +11,6 @@ public struct Position
 
   public override string ToString()
   {
-    return $"r{Row}c{Col}";
+    return $"r{Row+1}c{Col+1}";
   }
 }

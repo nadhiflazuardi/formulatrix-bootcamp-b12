@@ -2,7 +2,7 @@ namespace Checkers;
 
 public class Piece : IPiece
 {
-  public bool IsKing {get;}
+  public bool IsKing {get; private set;}
   public PieceColor PieceColor {get;}
   public Position CurrentPosition {get;}
 
@@ -10,5 +10,10 @@ public class Piece : IPiece
   {
     PieceColor = pieceColor;
     CurrentPosition = position;
+    IsKing = false;
+  }
+
+  public void PromoteToKing() {
+    IsKing = true;
   }
 }
