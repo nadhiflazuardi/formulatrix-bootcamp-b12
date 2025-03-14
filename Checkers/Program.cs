@@ -32,5 +32,7 @@ class Program
     Display display = new();
 
     GameController controller = new(player1, player2, board, display);
+
+    controller.StartGame();
   }
 }

@@ -3,19 +3,34 @@ namespace Checkers;
 public class GameController
 {
   private IBoard _board;
-  IPlayer Player1;
-  IPlayer Player2;
+  private IPlayer Player1;
+  private IPlayer Player2;
   public Dictionary<IPlayer, List<IPiece>> _playerPieces;
-  Display _display;
+  private Display _display;
+  private bool _isGameRunning;
 
   public GameController(IPlayer player1, IPlayer player2, IBoard board, Display display)
   {
+    _isGameRunning = true;
     _board = board;
     Player1 = player1;
     Player2 = player2;
-    _playerPieces?.Add(Player1, _board.GenerateBlackPieces());
-    _playerPieces?.Add(Player2, _board.GenerateWhitePieces());
+    _playerPieces = new Dictionary<IPlayer, List<IPiece>>
+    {
+    { Player1, _board.GenerateBlackPieces() },
+    { Player2, _board.GenerateWhitePieces() }
+    };
     _display = display;
+  }
+
+  
+
+  public void StartGame()
+  {
+    while (_isGameRunning)
+    {
+      _display.DisplayBoard(_board.Size, _board.Pieces);
+    }
   }
 
   public List<string> GetValidMoves(int row, int col)

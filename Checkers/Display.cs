@@ -1,7 +1,15 @@
 namespace Checkers;
 
 public class Display {
-  public void DisplayBoard(int Size, string BoardHorizontalSymbol, string BoardVerticalSymbol, Piece[,] Pieces)
+  public string BoardHorizontalSymbol { get; set; }
+  public string BoardVerticalSymbol { get; set; }
+
+  public Display() {
+    BoardHorizontalSymbol = "+---";
+    BoardVerticalSymbol = "| ";
+  }
+
+  public void DisplayBoard(int Size, Piece[,] Pieces)
   {
     Console.Clear();
     string header = " ";
