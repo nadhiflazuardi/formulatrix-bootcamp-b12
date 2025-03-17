@@ -18,7 +18,13 @@
     for (int i = 1; i <= n; i++)
     {
       string output = "";
-      foreach (int key in _rules.Keys)
+
+      // sort the keys so that user's new rules
+      // doesn't stack up at the end
+      List<int> sortedKeys = new(_rules.Keys);
+      sortedKeys.Sort();
+
+      foreach (int key in sortedKeys)
       {
         if (i % key == 0)
         {
@@ -49,6 +55,8 @@ class Program
     FooBar myClass = new();
     myClass.Print(60);
     myClass.AddRule(10, "tenzz");
+    myClass.Print(60);
+    myClass.AddRule(6, "sixzz");
     myClass.Print(60);
   }
 }
