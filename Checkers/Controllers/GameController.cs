@@ -11,6 +11,8 @@ public class GameController
   private Display _display;
   private bool _isGameRunning;
   private PieceColor _currentPlaying;
+  public Action<IPlayer>? OnGameEnd;
+  public Action<IPlayer, List<IPiece>>? OnTurnChanged;
 
   public GameController(IPlayer player1, IPlayer player2, IBoard board, Display display)
   {
@@ -26,15 +28,20 @@ public class GameController
     };
     _display = display;
   }
-  private Piece _mustContinueWithPiece;
+  private Piece? _mustContinueWithPiece;
   public void StartGame()
   {
     while (_isGameRunning)
     {
       _display.DisplayBoard(_board.Size, _board.Pieces);
 
+      // Display.ShowMessage("\nPieces Left:");
+      // Display.ShowMessage($"{Player1.Name}: {GetTotalPiece(Player1)}");
+      // Display.ShowMessage($"{Player2.Name}: {GetTotalPiece(Player2)}");
+
       IPlayer currentPlayer = _currentPlaying == PieceColor.Black ? Player1 : Player2;
-      Console.WriteLine($"\n{(_currentPlaying == PieceColor.Black ? $"{Player1.Name}'s (O)" : $"{Player2.Name}'s (X)")} turn");
+      OnTurnChanged?.Invoke(currentPlayer, _playerPieces[currentPlayer]);
+      // Display.ShowMessage($"\n{(_currentPlaying == PieceColor.Black ? $"{Player1.Name}'s (O)" : $"{Player2.Name}'s (X)")} turn");
 
       List<Piece> movablePieces = new();
       List<Piece> canCapturePieces = new();
@@ -93,26 +100,28 @@ public class GameController
         }
       }
 
-      if (movablePieces.Count == 0)
+      if (!HasValidMove(currentPlayer))
       {
-        Console.WriteLine($"{currentPlayer.Name} has no valid moves. Game over!");
-        _isGameRunning = false;
+        IPlayer winner = _currentPlaying == PieceColor.Black? Player2 : Player1;
+        Display.ShowMessage(StatusGame(_currentPlaying));
+        OnGameEnd?.Invoke(winner);
+        GameOver();
         Console.ReadLine();
         break;
       }
 
       if (canCapturePieces.Count > 0)
       {
-        Console.WriteLine($"You have {canCapturePieces.Count} piece(s) that can capture and must be played.");
+        Display.ShowMessage($"You have {canCapturePieces.Count} piece(s) that can capture and must be played.");
       }
 
-      Console.WriteLine("Choose a piece to move:");
+      Display.ShowMessage("\nChoose a piece to move:");
       if (canCapturePieces.Count > 0)
       {
         for (int i = 0; i < canCapturePieces.Count; i++)
         {
           Piece piece = canCapturePieces[i];
-          Console.WriteLine($"{i + 1}. Piece at row {piece.CurrentPosition.Row + 1}, column {piece.CurrentPosition.Col + 1} {(piece.IsKing ? "(King)" : "")}");
+          Display.ShowMessage($"{i + 1}. Piece at row {piece.CurrentPosition.Row + 1}, column {piece.CurrentPosition.Col + 1} {(piece.IsKing ? "(King)" : "")}");
         }
       }
       else
@@ -120,7 +129,7 @@ public class GameController
         for (int i = 0; i < movablePieces.Count; i++)
         {
           Piece piece = movablePieces[i];
-          Console.WriteLine($"{i + 1}. Piece at row {piece.CurrentPosition.Row + 1}, column {piece.CurrentPosition.Col + 1} {(piece.IsKing ? "(King)" : "")}");
+          Display.ShowMessage($"{i + 1}. Piece at row {piece.CurrentPosition.Row + 1}, column {piece.CurrentPosition.Col + 1} {(piece.IsKing ? "(King)" : "")}");
         }
       }
 
@@ -128,7 +137,7 @@ public class GameController
       int pieceChoice;
       if (!int.TryParse(Console.ReadLine(), out pieceChoice) || pieceChoice < 1 || pieceChoice > movablePieces.Count || (canCapturePieces.Count > 0 && pieceChoice > canCapturePieces.Count))
       {
-        Console.WriteLine("Invalid selection. Press Enter to try again.");
+        Display.ShowMessage("Invalid selection. Press Enter to try again.");
         Console.ReadLine();
         continue;
       }
@@ -148,17 +157,17 @@ public class GameController
         validMoves = allValidMoves[selectedPiece];
       }
 
-      Console.WriteLine("Available moves:");
+      Display.ShowMessage("Available moves:");
       for (int i = 0; i < validMoves.Count; i++)
       {
-        Console.WriteLine($"{i + 1}. Move to row {validMoves[i].Row + 1}, column {validMoves[i].Col + 1}");
+        Display.ShowMessage($"{i + 1}. Move to row {validMoves[i].Row + 1}, column {validMoves[i].Col + 1}");
       }
 
       Console.Write("Enter the number of your move choice: ");
       int moveChoice;
       if (!int.TryParse(Console.ReadLine(), out moveChoice) || moveChoice < 1 || moveChoice > validMoves.Count)
       {
-        Console.WriteLine("Invalid selection. Press Enter to try again.");
+        Display.ShowMessage("Invalid selection. Press Enter to try again.");
         Console.ReadLine();
         continue;
       }
@@ -184,19 +193,19 @@ public class GameController
           }
           else
           {
-            _currentPlaying = _currentPlaying == PieceColor.White ? PieceColor.Black : PieceColor.White;
+            SwitchTurn();
             _mustContinueWithPiece = null;
           }
         }
         else
         {
-          _currentPlaying = _currentPlaying == PieceColor.White ? PieceColor.Black : PieceColor.White;
+          SwitchTurn();
           _mustContinueWithPiece = null;
         }
       }
       else
       {
-        Console.WriteLine("Move failed. Press Enter to try again.");
+        Display.ShowMessage("Move failed. Press Enter to try again.");
         Console.ReadLine();
       }
     }
@@ -303,41 +312,42 @@ public class GameController
 
   public bool HasValidMove(IPlayer player)
   {
-    return true;
+    foreach (IPiece piece in _playerPieces[player])
+    {
+      if (piece is Piece p && _board.Pieces[p.CurrentPosition.Row, p.CurrentPosition.Col] == null)
+        continue;
+
+      if (piece is Piece playerPiece)
+      {
+        Position pos = playerPiece.CurrentPosition;
+        List<Position> moves = GetValidMoves(pos.Row, pos.Col);
+
+        if (moves.Count > 0)
+        {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
-  public List<Position> GetValidMove(IBoard board, List<IPiece> pieces)
+  public void GameOver()
   {
-    return [];
-  }
-
-  public bool IsValidMove(IPiece piece, Position newPosition, IBoard board)
-  {
-    return true;
-  }
-
-  public Position NewPosition(IPiece piece, Position newPosition)
-  {
-    return newPosition;
-  }
-
-  public bool IsValidCaptureMove(IPiece piece, Position newPosition, IBoard board)
-  {
-    return true;
-  }
-
-  public void RemovePiece(IPiece piece)
-  {
-
+    _isGameRunning = false;
   }
 
   public void SwitchTurn()
   {
-
+    _currentPlaying = _currentPlaying == PieceColor.White ? PieceColor.Black : PieceColor.White;
   }
 
   public int GetTotalPiece(IPlayer player)
   {
-    return 0;
+    return _playerPieces[player].Count;
+  }
+
+  public string StatusGame(PieceColor pieceColor)
+  {
+    return $"There are no more {pieceColor} pieces. Game over!";
   }
 }

@@ -7,10 +7,10 @@ public class Board : IBoard
   public int Size { get; set; }
   public Piece[,] Pieces { get; set; }
 
-  public Board()
+  public Board(int size)
   {
-    Pieces = new Piece[8, 8];
-    Size = 8;
+    Size = size;
+    Pieces = new Piece[size, size];
     GenerateWhitePieces();
     GenerateBlackPieces();
   }
@@ -23,7 +23,7 @@ public class Board : IBoard
     {
       if (row % 2 == 0)
       {
-        for (int col = 1; col <= 7; col += 2)
+        for (int col = 1; col <= Size - 1; col += 2)
         {
           Piece piece = new(PieceColor.White, new Position(row, col));
           Pieces[row, col] = piece;
@@ -32,7 +32,7 @@ public class Board : IBoard
       }
       else
       {
-        for (int col = 0; col <= 7; col += 2)
+        for (int col = 0; col <= Size - 1; col += 2)
         {
           Piece piece = new(PieceColor.White, new Position(row, col));
           Pieces[row, col] = piece;
@@ -48,24 +48,48 @@ public class Board : IBoard
   {
     List<IPiece> blackPieces = new();
 
-    for (int row = 5; row <= 7; row++)
+    for (int row = Size - 3; row <= Size - 1; row++)
     {
-      if (row % 2 == 0)
+      if (Size % 2 == 0)
       {
-        for (int col = 1; col <= 7; col += 2)
+        if (row % 2 == 0)
         {
-          Piece piece = new(PieceColor.Black, new Position(row, col));
-          Pieces[row, col] = piece;
-          blackPieces.Add(piece);
+          for (int col = 1; col <= Size - 1; col += 2)
+          {
+            Piece piece = new(PieceColor.Black, new Position(row, col));
+            Pieces[row, col] = piece;
+            blackPieces.Add(piece);
+          }
+        }
+        else
+        {
+          for (int col = 0; col <= Size - 1; col += 2)
+          {
+            Piece piece = new(PieceColor.Black, new Position(row, col));
+            Pieces[row, col] = piece;
+            blackPieces.Add(piece);
+          }
         }
       }
       else
       {
-        for (int col = 0; col <= 7; col += 2)
+        if (row % 2 == 0)
         {
-          Piece piece = new(PieceColor.Black, new Position(row, col));
-          Pieces[row, col] = piece;
-          blackPieces.Add(piece);
+          for (int col = 0; col <= Size - 1; col += 2)
+          {
+            Piece piece = new(PieceColor.Black, new Position(row, col));
+            Pieces[row, col] = piece;
+            blackPieces.Add(piece);
+          }
+        }
+        else
+        {
+          for (int col = 1; col <= Size - 1; col += 2)
+          {
+            Piece piece = new(PieceColor.Black, new Position(row, col));
+            Pieces[row, col] = piece;
+            blackPieces.Add(piece);
+          }
         }
       }
     }
@@ -129,11 +153,11 @@ public class Board : IBoard
         updatedPiece.PromoteToKing();
       }
 
-      if ((updatedPiece.PieceColor == PieceColor.White && newRow == 7) ||
+      if ((updatedPiece.PieceColor == PieceColor.White && newRow == Size - 1) ||
           (updatedPiece.PieceColor == PieceColor.Black && newRow == 0))
       {
         updatedPiece.PromoteToKing();
-        Console.WriteLine($"Piece in {updatedPiece.CurrentPosition.ToString()} is promoted to king!");
+        Display.ShowMessage($"Piece in {updatedPiece.CurrentPosition.ToString()} is promoted to king!");
       }
 
       playerPieces[pieceOwner].Add(updatedPiece);
@@ -141,11 +165,11 @@ public class Board : IBoard
       Pieces[newRow, newCol] = updatedPiece;
     }
 
-    if ((pieceToMove.PieceColor == PieceColor.White && newRow == 7) ||
+    if ((pieceToMove.PieceColor == PieceColor.White && newRow == Size - 1) ||
         (pieceToMove.PieceColor == PieceColor.Black && newRow == 0))
     {
       pieceToMove.PromoteToKing();
-      Console.WriteLine($"Piece in {pieceToMove.CurrentPosition.ToString()} is promoted to king!");
+      Display.ShowMessage($"Piece in {pieceToMove.CurrentPosition.ToString()} is promoted to king!");
     }
 
     return true;
