@@ -1,4 +1,6 @@
 namespace Checkers;
+using Checkers.Interfaces;
+using Checkers.Enums;
 
 public class GameController
 {

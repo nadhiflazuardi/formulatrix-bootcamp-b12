@@ -8,13 +8,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Program.cs" />
-    <Content Include="Interfaces.cs" />
     <Content Include="Position.cs" />
-    <Content Include="GameController.cs" />
     <Content Include="Player.cs" />
     <Content Include="Display.cs" />
-    <Content Include="Enums.cs" />
     <Content Include="Board.cs" />
     <Content Include="Piece.cs" />
+    <Content Include="Interfaces\IBoard.cs" />
+    <Content Include="Interfaces\IPlayer.cs" />
+    <Content Include="Enums\PieceColor.cs" />
+    <Content Include="Interfaces\IPiece.cs" />
+    <Content Include="Controllers\GameController.cs" />
+    <Content Include="Views\Display.cs" />
+    <Content Include="Models\Board.cs" />
+    <Content Include="Models\Piece.cs" />
+    <Content Include="Models\Player.cs" />
+    <Content Include="Models\Position.cs" />
   </ItemGroup>
 </Project>

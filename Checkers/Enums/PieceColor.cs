@@ -1,7 +1,7 @@
-namespace Checkers;
+namespace Checkers.Enums;
 
 public enum PieceColor
 {
-  Black, 
+  Black,
   White
 }

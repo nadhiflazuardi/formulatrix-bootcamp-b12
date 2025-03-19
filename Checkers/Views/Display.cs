@@ -1,4 +1,5 @@
 namespace Checkers;
+using Checkers.Enums;
 
 public class Display {
   public string BoardHorizontalSymbol { get; set; }

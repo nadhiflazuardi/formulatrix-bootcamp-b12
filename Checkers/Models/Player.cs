@@ -1,4 +1,5 @@
 namespace Checkers;
+using Checkers.Interfaces;
 
 public class Player : IPlayer
 {
