@@ -127,6 +127,13 @@ public class Board : IBoard
         updatedPiece.PromoteToKing();
       }
 
+      if ((updatedPiece.PieceColor == PieceColor.White && newRow == 7) ||
+          (updatedPiece.PieceColor == PieceColor.Black && newRow == 0))
+      {
+        updatedPiece.PromoteToKing();
+        Console.WriteLine($"Piece in {updatedPiece.CurrentPosition.ToString()} is promoted to king!");
+      }
+
       playerPieces[pieceOwner].Add(updatedPiece);
 
       Pieces[newRow, newCol] = updatedPiece;
@@ -136,6 +143,7 @@ public class Board : IBoard
         (pieceToMove.PieceColor == PieceColor.Black && newRow == 0))
     {
       pieceToMove.PromoteToKing();
+      Console.WriteLine($"Piece in {pieceToMove.CurrentPosition.ToString()} is promoted to king!");
     }
 
     return true;

@@ -54,15 +54,11 @@ public class GameController
           }
           else
           {
-            Console.WriteLine("Debug1");
-
             _mustContinueWithPiece = null;
           }
         }
         else
         {
-          Console.WriteLine("Debug2");
-
           _mustContinueWithPiece = null;
         }
       }
@@ -71,7 +67,6 @@ public class GameController
       {
         foreach (IPiece piece in _playerPieces[currentPlayer])
         {
-
           if (piece is Piece p && _board.Pieces[p.CurrentPosition.Row, p.CurrentPosition.Col] == null)
             continue;
 
