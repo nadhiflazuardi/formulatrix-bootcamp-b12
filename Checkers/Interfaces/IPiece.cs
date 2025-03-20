@@ -8,4 +8,5 @@ public interface IPiece
   Position CurrentPosition { get; }
 
   public void PromoteToKing();
+  public void Move(Position newPosition);
 }

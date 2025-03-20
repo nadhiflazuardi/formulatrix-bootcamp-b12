@@ -18,4 +18,8 @@ public class Piece : IPiece
   public void PromoteToKing() {
     IsKing = true;
   }
+
+  public void Move(Position position) {
+    CurrentPosition = position;
+  }
 }

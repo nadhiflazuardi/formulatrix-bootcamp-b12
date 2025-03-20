@@ -94,7 +94,7 @@ public class Board : IBoard
     }
 
     Pieces[newRow, newCol] = pieceToMove;
-    pieceToMove.CurrentPosition = new Position(newRow, newCol);
+    pieceToMove.Move(newPosition);
     Pieces[oldRow, oldCol] = null;
 
     if ((pieceToMove.PieceColor == PieceColor.White && newRow == Size - 1) ||
