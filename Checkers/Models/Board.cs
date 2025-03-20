@@ -50,51 +50,28 @@ public class Board : IBoard
 
     for (int row = Size - 3; row <= Size - 1; row++)
     {
-      if (Size % 2 == 0)
+      int startCol = GetStartingColumnForRow(row);
+      for (int col = startCol; col < Size; col += 2)
       {
-        if (row % 2 == 0)
-        {
-          for (int col = 1; col <= Size - 1; col += 2)
-          {
-            Piece piece = new(PieceColor.Black, new Position(row, col));
-            Pieces[row, col] = piece;
-            blackPieces.Add(piece);
-          }
-        }
-        else
-        {
-          for (int col = 0; col <= Size - 1; col += 2)
-          {
-            Piece piece = new(PieceColor.Black, new Position(row, col));
-            Pieces[row, col] = piece;
-            blackPieces.Add(piece);
-          }
-        }
-      }
-      else
-      {
-        if (row % 2 == 0)
-        {
-          for (int col = 0; col <= Size - 1; col += 2)
-          {
-            Piece piece = new(PieceColor.Black, new Position(row, col));
-            Pieces[row, col] = piece;
-            blackPieces.Add(piece);
-          }
-        }
-        else
-        {
-          for (int col = 1; col <= Size - 1; col += 2)
-          {
-            Piece piece = new(PieceColor.Black, new Position(row, col));
-            Pieces[row, col] = piece;
-            blackPieces.Add(piece);
-          }
-        }
+        Piece piece = new(PieceColor.Black, new Position(row, col));
+        Pieces[row, col] = piece;
+        blackPieces.Add(piece);
       }
     }
 
     return blackPieces;
+  }
+
+  private int GetStartingColumnForRow(int row)
+  {
+    if (Size % 2 == 0)
+    {
+      return row % 2 == 0 ? 1 : 0;
+    }
+    else
+    {
+      return row % 2 == 0 ? 0 : 1;
+    }
   }
 
   public bool MovePiece(Position oldPosition, Position newPosition, Dictionary<IPlayer, List<IPiece>> playerPieces, IPlayer player1, IPlayer player2)
