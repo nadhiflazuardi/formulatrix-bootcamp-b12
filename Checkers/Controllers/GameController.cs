@@ -5,26 +5,26 @@ using Checkers.Enums;
 public class GameController
 {
   private IBoard _board;
-  private IPlayer Player1;
-  private IPlayer Player2;
-  public Dictionary<IPlayer, List<IPiece>> _playerPieces;
+  private IPlayer _player1;
+  private IPlayer _player2;
+  private Dictionary<IPlayer, List<IPiece>> _playerPieces;
   private IDisplay _display;
   private bool _isGameRunning;
   private PieceColor _currentPlaying;
   public Action<IPlayer>? OnGameEnd;
-  public Action<IPlayer, List<IPiece>>? OnTurnChanged;
+  public Action<IPlayer, IPlayer, int, int>? OnTurnChanged;
 
   public GameController(IPlayer player1, IPlayer player2, IBoard board, IDisplay display)
   {
     _isGameRunning = true;
     _currentPlaying = PieceColor.Black;
     _board = board;
-    Player1 = player1;
-    Player2 = player2;
+    _player1 = player1;
+    _player2 = player2;
     _playerPieces = new Dictionary<IPlayer, List<IPiece>>
     {
-    { Player1, _board.GenerateBlackPieces() },
-    { Player2, _board.GenerateWhitePieces() }
+    { _player1, _board.GenerateBlackPieces() },
+    { _player2, _board.GenerateWhitePieces() }
     };
     _display = display;
   }
@@ -35,13 +35,8 @@ public class GameController
     {
       _display.DisplayBoard(_board.Size, _board.Pieces);
 
-      // Display.ShowMessage("\nPieces Left:");
-      // Display.ShowMessage($"{Player1.Name}: {GetTotalPiece(Player1)}");
-      // Display.ShowMessage($"{Player2.Name}: {GetTotalPiece(Player2)}");
-
-      IPlayer currentPlayer = _currentPlaying == PieceColor.Black ? Player1 : Player2;
-      OnTurnChanged?.Invoke(currentPlayer, _playerPieces[currentPlayer]);
-      // Display.ShowMessage($"\n{(_currentPlaying == PieceColor.Black ? $"{Player1.Name}'s (O)" : $"{Player2.Name}'s (X)")} turn");
+      IPlayer currentPlayer = _currentPlaying == PieceColor.Black ? _player1 : _player2;
+      OnTurnChanged?.Invoke(currentPlayer, currentPlayer == _player1 ? _player2 : _player1, GetTotalPiece(currentPlayer), GetTotalPiece(currentPlayer == _player1 ? _player2 : _player1));
 
       List<Piece> movablePieces = new();
       List<Piece> canCapturePieces = new();
@@ -102,7 +97,7 @@ public class GameController
 
       if (!HasValidMove(currentPlayer))
       {
-        IPlayer winner = _currentPlaying == PieceColor.Black ? Player2 : Player1;
+        IPlayer winner = _currentPlaying == PieceColor.Black ? _player2 : _player1;
         Display.ShowMessage(StatusGame(_currentPlaying));
         OnGameEnd?.Invoke(winner);
         GameOver();
@@ -133,7 +128,7 @@ public class GameController
         }
       }
 
-      Console.Write("Enter the number of your piece choice: ");
+      Display.ShowInlineMessage("Enter the number of your piece choice: ");
       int pieceChoice;
       if (!int.TryParse(Console.ReadLine(), out pieceChoice) || pieceChoice < 1 || pieceChoice > movablePieces.Count || (canCapturePieces.Count > 0 && pieceChoice > canCapturePieces.Count))
       {
@@ -163,7 +158,7 @@ public class GameController
         Display.ShowMessage($"{i + 1}. Move to row {validMoves[i].Row + 1}, column {validMoves[i].Col + 1}");
       }
 
-      Console.Write("Enter the number of your move choice: ");
+      Display.ShowInlineMessage("Enter the number of your move choice: ");
       int moveChoice;
       if (!int.TryParse(Console.ReadLine(), out moveChoice) || moveChoice < 1 || moveChoice > validMoves.Count)
       {
@@ -177,7 +172,7 @@ public class GameController
       Position oldPosition = selectedPiece.CurrentPosition;
       Position newPosition = validMoves[moveChoice];
 
-      bool moveSuccessful = _board.MovePiece(oldPosition, newPosition, _playerPieces, Player1, Player2);
+      bool moveSuccessful = _board.MovePiece(oldPosition, newPosition, _playerPieces, _player1, _player2);
 
       if (moveSuccessful)
       {
@@ -378,7 +373,7 @@ public class GameController
 
     Piece capturedPiece = _board.Pieces[capturedRow, capturedCol];
 
-    IPlayer opponentPlayer = capturedPiece.PieceColor == PieceColor.Black ? Player1 : Player2;
+    IPlayer opponentPlayer = capturedPiece.PieceColor == PieceColor.Black ? _player1 : _player2;
     _playerPieces[opponentPlayer].Remove(capturedPiece);
 
     _board.Pieces[capturedRow, capturedCol] = null;
@@ -401,6 +396,14 @@ public class GameController
 
   public string StatusGame(PieceColor pieceColor)
   {
-    return $"There are no more {pieceColor} pieces. Game over!";
+    return $@"
+  _______      ___      .___  ___.  _______      ______   ____    ____  _______ .______       __  
+ /  _____|    /   \     |   \/   | |   ____|    /  __  \  \   \  /   / |   ____||   _  \     |  | 
+|  |  __     /  ^  \    |  \  /  | |  |__      |  |  |  |  \   \/   /  |  |__   |  |_)  |    |  | 
+|  | |_ |   /  /_\  \   |  |\/|  | |   __|     |  |  |  |   \      /   |   __|  |      /     |  | 
+|  |__| |  /  _____  \  |  |  |  | |  |____    |  `--'  |    \    /    |  |____ |  |\  \----.|__| 
+ \______| /__/     \__\ |__|  |__| |_______|    \______/      \__/     |_______|| _| `._____|(__)
+
+There are no more {pieceColor} pieces.";
   }
 }

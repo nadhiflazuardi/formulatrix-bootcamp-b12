@@ -5,15 +5,22 @@ class Program
   static void Main()
   {
     Display display = new();
-    Display.ShowMessage("Welcome to Checkers!");
+    Display.ShowMessage(@"
+  ______  __    __   _______   ______  __  ___  _______ .______          _______.
+ /      ||  |  |  | |   ____| /      ||  |/  / |   ____||   _  \        /       |
+|  ,----'|  |__|  | |  |__   |  ,----'|  '  /  |  |__   |  |_)  |      |   (----`
+|  |     |   __   | |   __|  |  |     |    <   |   __|  |      /        \   \    
+|  `----.|  |  |  | |  |____ |  `----.|  .  \  |  |____ |  |\  \----.----)   |   
+ \______||__|  |__| |_______| \______||__|\__\ |_______|| _| `._____|_______/    
+    ");
 
-    Console.Write("Enter Player 1 name: ");
+    Display.ShowInlineMessage("\nEnter Player 1 name: ");
     string? player1Input = Console.ReadLine();
     string player1Name = string.IsNullOrWhiteSpace(player1Input) ? "Player 1" : player1Input;
 
     string player1Color = display.ChooseColor();
 
-    Console.Write("Enter Player 2 name: ");
+    Display.ShowInlineMessage("\nEnter Player 2 name: ");
     string? player2Input = Console.ReadLine();
     string player2Name = string.IsNullOrWhiteSpace(player2Input) ? "Player 2" : player2Input;
 
@@ -43,13 +50,17 @@ class Program
 
     controller.OnGameEnd = (winner) =>
     {
-      Display.ShowMessage($"{winner.Name} wins!");
+      Display.ShowMessage($"\n\n{winner.Name} wins!");
     };
 
-    controller.OnTurnChanged = (player, pieces) =>
+    controller.OnTurnChanged = (player1, player2, pieceLeft1, pieceLeft2) =>
     {
-      string symbol = player == playerBlack ? "O" : "X";
-      Display.ShowMessage($"\n\n{player.Name}'s ({symbol}) turn. Pieces left: {pieces.Count}");
+      Display.ShowMessage("\n\nPieces Left:");
+      Display.ShowMessage($"{player1.Name}: {pieceLeft1}");
+      Display.ShowMessage($"{player2.Name}: {pieceLeft2}");
+
+      string symbol = player1 == playerBlack ? "O" : "X";
+      Display.ShowMessage($"\n{player1.Name}'s ({symbol}) turn.");
     };
 
     controller.StartGame();
