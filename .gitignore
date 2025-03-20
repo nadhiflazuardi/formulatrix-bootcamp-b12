@@ -263,3 +263,5 @@ FakesAssemblies/
 *.opt
 
 .AssemblyInfo.cs
+
+*.json

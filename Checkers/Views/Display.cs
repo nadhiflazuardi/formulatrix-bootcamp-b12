@@ -97,7 +97,7 @@ public class Display : IDisplay
     string? color;
     while (true)
     {
-      Console.Write("Choose your color (black/white): ");
+      ShowInlineMessage("Choose your piece color (black/white): ");
       color = Console.ReadLine()?.ToLower().Trim();
       if (color == "black" || color == "white")
       {
