@@ -1,7 +1,8 @@
 namespace Checkers;
 using Checkers.Enums;
+using Checkers.Interfaces;
 
-public class Display
+public class Display : IDisplay
 {
   public string BoardHorizontalSymbol { get; set; }
   public string BoardVerticalSymbol { get; set; }
@@ -89,5 +90,24 @@ public class Display
   public static void ShowInlineMessage(string text)
   {
     Console.Write(text);
+  }
+
+  public string ChooseColor()
+  {
+    string? color;
+    while (true)
+    {
+      Console.Write("Choose your color (black/white): ");
+      color = Console.ReadLine()?.ToLower().Trim();
+      if (color == "black" || color == "white")
+      {
+        break;
+      }
+      else
+      {
+        ShowMessage("Invalid color choice. Please choose 'black' or 'white'.");
+      }
+    }
+    return color;
   }
 }

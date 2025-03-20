@@ -23,5 +23,6 @@
     <Content Include="Models\Piece.cs" />
     <Content Include="Models\Player.cs" />
     <Content Include="Models\Position.cs" />
+    <Content Include="Interfaces\IDisplay.cs" />
   </ItemGroup>
 </Project>
