@@ -217,7 +217,7 @@ public class GameController
   {
     List<Position> validMoves = new();
 
-    if (row < 0 || row >= 8 || col < 0 || col >= 8 || _board.Pieces[row, col] == null)
+    if (row < 0 || row >= _board.Size || col < 0 || col >= _board.Size || _board.Pieces[row, col] == null)
     {
       return validMoves;
     }
@@ -244,7 +244,7 @@ public class GameController
   {
     List<Position> validMoves = new();
 
-    if (row < 0 || row >= 8 || col < 0 || col >= 8 || _board.Pieces[row, col] == null)
+    if (row < 0 || row >= _board.Size || col < 0 || col >= _board.Size || _board.Pieces[row, col] == null)
     {
       return validMoves;
     }
@@ -309,7 +309,7 @@ public class GameController
 
   private bool IsValidMove(int row, int col)
   {
-    return row >= 0 && row < 8 && col >= 0 && col < 8;
+    return row >= 0 && row < _board.Size && col >= 0 && col < _board.Size;
   }
 
   public bool HasValidMove(IPlayer player)
