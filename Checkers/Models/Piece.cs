@@ -6,7 +6,7 @@ public class Piece : IPiece
 {
   public bool IsKing {get; private set;}
   public PieceColor PieceColor {get;}
-  public Position CurrentPosition {get;}
+  public Position CurrentPosition {get; set;}
 
   public Piece(PieceColor pieceColor, Position position)
   {

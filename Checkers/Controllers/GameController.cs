@@ -8,13 +8,13 @@ public class GameController
   private IPlayer Player1;
   private IPlayer Player2;
   public Dictionary<IPlayer, List<IPiece>> _playerPieces;
-  private Display _display;
+  private IDisplay _display;
   private bool _isGameRunning;
   private PieceColor _currentPlaying;
   public Action<IPlayer>? OnGameEnd;
   public Action<IPlayer, List<IPiece>>? OnTurnChanged;
 
-  public GameController(IPlayer player1, IPlayer player2, IBoard board, Display display)
+  public GameController(IPlayer player1, IPlayer player2, IBoard board, IDisplay display)
   {
     _isGameRunning = true;
     _currentPlaying = PieceColor.Black;
@@ -102,7 +102,7 @@ public class GameController
 
       if (!HasValidMove(currentPlayer))
       {
-        IPlayer winner = _currentPlaying == PieceColor.Black? Player2 : Player1;
+        IPlayer winner = _currentPlaying == PieceColor.Black ? Player2 : Player1;
         Display.ShowMessage(StatusGame(_currentPlaying));
         OnGameEnd?.Invoke(winner);
         GameOver();
@@ -185,6 +185,8 @@ public class GameController
 
         if (wasCapture)
         {
+          RemovePiece(oldPosition, newPosition);
+
           List<Position> nextCaptures = GetCapturingMoves(newPosition.Row, newPosition.Col);
 
           if (nextCaptures.Count > 0)
@@ -261,14 +263,14 @@ public class GameController
     int newRow = row + direction;
     int newColLeft = col - 1;
 
-    if (IsValidPosition(newRow, newColLeft) && _board.Pieces[newRow, newColLeft] == null)
+    if (IsValidMove(newRow, newColLeft) && _board.Pieces[newRow, newColLeft] == null)
     {
       validMoves.Add(new Position(newRow, newColLeft));
     }
 
     int newColRight = col + 1;
 
-    if (IsValidPosition(newRow, newColRight) && _board.Pieces[newRow, newColRight] == null)
+    if (IsValidMove(newRow, newColRight) && _board.Pieces[newRow, newColRight] == null)
     {
       validMoves.Add(new Position(newRow, newColRight));
     }
@@ -290,14 +292,14 @@ public class GameController
       int adjacentRow = row + rowDirections[i];
       int adjacentCol = col + colDirections[i];
 
-      if (IsValidPosition(adjacentRow, adjacentCol) &&
+      if (IsValidMove(adjacentRow, adjacentCol) &&
           _board.Pieces[adjacentRow, adjacentCol] != null &&
           _board.Pieces[adjacentRow, adjacentCol].PieceColor != pieceColor)
       {
         int landingRow = adjacentRow + rowDirections[i];
         int landingCol = adjacentCol + colDirections[i];
 
-        if (IsValidPosition(landingRow, landingCol) && _board.Pieces[landingRow, landingCol] == null)
+        if (IsValidCaptureMove(new Position(row, col), new Position(landingRow, landingCol)))
         {
           validMoves.Add(new Position(landingRow, landingCol));
         }
@@ -305,7 +307,7 @@ public class GameController
     }
   }
 
-  private bool IsValidPosition(int row, int col)
+  private bool IsValidMove(int row, int col)
   {
     return row >= 0 && row < 8 && col >= 0 && col < 8;
   }
@@ -329,6 +331,57 @@ public class GameController
       }
     }
     return false;
+  }
+
+  public bool IsValidCaptureMove(Position currentPosition, Position targetPosition)
+  {
+    // Check if the move is two squares away diagonally
+    int rowDifference = targetPosition.Row - currentPosition.Row;
+    int colDifference = targetPosition.Col - currentPosition.Col;
+    if (Math.Abs(rowDifference) != 2 || Math.Abs(colDifference) != 2)
+    {
+      return false;
+    }
+
+    // Check if the intermediate square contains an opponent's piece
+    int intermediateRow = currentPosition.Row + rowDifference / 2;
+    int intermediateCol = currentPosition.Col + colDifference / 2;
+    if (!IsValidMove(intermediateRow, intermediateCol) || _board.Pieces[intermediateRow, intermediateCol] == null)
+    {
+      return false;
+    }
+    Piece intermediatePiece = _board.Pieces[intermediateRow, intermediateCol];
+    Piece currentPiece = _board.Pieces[currentPosition.Row, currentPosition.Col];
+    if (intermediatePiece.PieceColor == currentPiece.PieceColor)
+    {
+      return false;
+    }
+
+    // Check if the target position is empty
+    if (!IsValidMove(targetPosition.Row, targetPosition.Col) || _board.Pieces[targetPosition.Row, targetPosition.Col] != null)
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  public void RemovePiece(Position oldPosition, Position newPosition)
+  {
+    int oldRow = oldPosition.Row;
+    int oldCol = oldPosition.Col;
+    int newRow = newPosition.Row;
+    int newCol = newPosition.Col;
+
+    int capturedRow = (oldRow + newRow) / 2;
+    int capturedCol = (oldCol + newCol) / 2;
+
+    Piece capturedPiece = _board.Pieces[capturedRow, capturedCol];
+
+    IPlayer opponentPlayer = capturedPiece.PieceColor == PieceColor.Black ? Player1 : Player2;
+    _playerPieces[opponentPlayer].Remove(capturedPiece);
+
+    _board.Pieces[capturedRow, capturedCol] = null;
   }
 
   public void GameOver()

@@ -116,54 +116,34 @@ public class Board : IBoard
       return false;
     }
 
-    bool isCapture = Math.Abs(newRow - oldRow) == 2 && Math.Abs(newCol - oldCol) == 2;
-
-    if (isCapture)
-    {
-      int capturedRow = (oldRow + newRow) / 2;
-      int capturedCol = (oldCol + newCol) / 2;
-
-      if (Pieces[capturedRow, capturedCol] == null ||
-          Pieces[capturedRow, capturedCol].PieceColor == pieceToMove.PieceColor)
-      {
-        return false;
-      }
-
-      Piece capturedPiece = Pieces[capturedRow, capturedCol];
-
-      IPlayer opponentPlayer = capturedPiece.PieceColor == PieceColor.Black ? player1 : player2;
-      playerPieces[opponentPlayer].Remove(capturedPiece);
-
-      Pieces[capturedRow, capturedCol] = null;
-    }
-
     Pieces[newRow, newCol] = pieceToMove;
+    pieceToMove.CurrentPosition = new Position(newRow, newCol);
     Pieces[oldRow, oldCol] = null;
 
-    if (pieceToMove.CurrentPosition.Row != newRow || pieceToMove.CurrentPosition.Col != newCol)
-    {
-      IPlayer pieceOwner = pieceToMove.PieceColor == PieceColor.Black ? player1 : player2;
+    // if (pieceToMove.CurrentPosition.Row != newRow || pieceToMove.CurrentPosition.Col != newCol)
+    // {
+    //   IPlayer pieceOwner = pieceToMove.PieceColor == PieceColor.Black ? player1 : player2;
 
-      playerPieces[pieceOwner].Remove(pieceToMove);
+    //   playerPieces[pieceOwner].Remove(pieceToMove);
 
-      Piece updatedPiece = new Piece(pieceToMove.PieceColor, new Position(newRow, newCol));
+    //   Piece updatedPiece = new Piece(pieceToMove.PieceColor, new Position(newRow, newCol));
 
-      if (pieceToMove.IsKing)
-      {
-        updatedPiece.PromoteToKing();
-      }
+    //   if (pieceToMove.IsKing)
+    //   {
+    //     updatedPiece.PromoteToKing();
+    //   }
 
-      if ((updatedPiece.PieceColor == PieceColor.White && newRow == Size - 1) ||
-          (updatedPiece.PieceColor == PieceColor.Black && newRow == 0))
-      {
-        updatedPiece.PromoteToKing();
-        Display.ShowMessage($"Piece in {updatedPiece.CurrentPosition.ToString()} is promoted to king!");
-      }
+    //   if ((updatedPiece.PieceColor == PieceColor.White && newRow == Size - 1) ||
+    //       (updatedPiece.PieceColor == PieceColor.Black && newRow == 0))
+    //   {
+    //     updatedPiece.PromoteToKing();
+    //     Display.ShowMessage($"Piece in {updatedPiece.CurrentPosition.ToString()} is promoted to king!");
+    //   }
 
-      playerPieces[pieceOwner].Add(updatedPiece);
+    //   playerPieces[pieceOwner].Add(updatedPiece);
 
-      Pieces[newRow, newCol] = updatedPiece;
-    }
+    //   Pieces[newRow, newCol] = updatedPiece;
+    // }
 
     if ((pieceToMove.PieceColor == PieceColor.White && newRow == Size - 1) ||
         (pieceToMove.PieceColor == PieceColor.Black && newRow == 0))
