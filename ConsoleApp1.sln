@@ -79,6 +79,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic3", "Logic3\Logic3.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkers", "Checkers\Checkers.csproj", "{55B5501D-B5C4-4E15-A86D-59EE4A8D98C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnSerilog", "LearnSerilog\LearnSerilog.csproj", "{0F566A75-C2FC-486D-AC9E-D4B6E4529FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnNuget", "LearnNuget\LearnNuget.csproj", "{428AE595-6626-46C8-A3D1-A05C5A6680DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -224,6 +228,14 @@ Global
 		{55B5501D-B5C4-4E15-A86D-59EE4A8D98C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55B5501D-B5C4-4E15-A86D-59EE4A8D98C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55B5501D-B5C4-4E15-A86D-59EE4A8D98C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F566A75-C2FC-486D-AC9E-D4B6E4529FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F566A75-C2FC-486D-AC9E-D4B6E4529FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F566A75-C2FC-486D-AC9E-D4B6E4529FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F566A75-C2FC-486D-AC9E-D4B6E4529FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{428AE595-6626-46C8-A3D1-A05C5A6680DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{428AE595-6626-46C8-A3D1-A05C5A6680DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{428AE595-6626-46C8-A3D1-A05C5A6680DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{428AE595-6626-46C8-A3D1-A05C5A6680DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1F9BDA6B-0D21-40BA-BA7A-F3820590473A} = {85F0B5E8-0692-4885-91FF-75D52CD47993}

@@ -1,0 +1,5 @@
+2025-03-24 09:29:59.531 +07:00 [INF] Hello, world!
+2025-03-24 09:29:59.595 +07:00 [DBG] Dividing 10 by 0
+2025-03-24 09:29:59.604 +07:00 [ERR] Something went wrong
+System.DivideByZeroException: Attempted to divide by zero.
+   at Program.Main() in C:\Users\Batch 12\Documents\C# Projects\LearnSerilog\Program.cs:line 20
