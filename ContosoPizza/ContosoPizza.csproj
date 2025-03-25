@@ -12,5 +12,8 @@
     <Content Include="ContosoPizza.http" />
     <Content Include="Controllers\WeatherForecastController.cs" />
     <Content Include="Properties\launchSettings.json" />
+    <Content Include="Models\Pizza.cs" />
+    <Content Include="Services\PizzaService.cs" />
+    <Content Include="Controllers\PizzaController.cs" />
   </ItemGroup>
 </Project>
