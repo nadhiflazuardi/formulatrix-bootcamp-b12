@@ -1,4 +1,4 @@
-using EmployeeAdminPortal.Data;
+using EmployeeAdminPortal.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

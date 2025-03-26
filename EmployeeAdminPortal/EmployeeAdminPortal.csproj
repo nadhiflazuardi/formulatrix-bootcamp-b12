@@ -17,7 +17,5 @@
     <Content Include="Properties\launchSettings.json" />
     <Content Include="Program.cs" />
     <Content Include="EmployeeAdminPortal.http" />
-    <Content Include="Models\Entities\Employee.cs" />
-    <Content Include="Data\ApplicationDbContext.cs" />
   </ItemGroup>
 </Project>

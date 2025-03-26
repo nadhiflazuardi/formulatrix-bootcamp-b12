@@ -1,7 +1,7 @@
-using EmployeeAdminPortal.Models.Entities;
+using EmployeeAdminPortal.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeAdminPortal.Data;
+namespace EmployeeAdminPortal.Repository;
 
 public class ApplicationDbContext : DbContext
 {
