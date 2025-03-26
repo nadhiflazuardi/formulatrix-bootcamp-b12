@@ -2,6 +2,7 @@ using EmployeeAdminPortal.Repository;
 using EmployeeAdminPortal.Models;
 using EmployeeAdminPortal.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeAdminPortal.Controllers;
 
@@ -17,18 +18,16 @@ public class EmployeesController : ControllerBase
   }
 
   [HttpGet]
-  public IActionResult GetAllEmployees()
+  public async Task<IActionResult> GetAllEmployees()
   {
-    List<Employee> allEmployees = _dbContext.Employees.ToList();
-
+    List<Employee> allEmployees = await _dbContext.Employees.ToListAsync();
     return Ok(allEmployees);
   }
 
-  [HttpGet]
-  [Route("{id:guid}")]
-  public IActionResult GetEmployeeById(Guid id)
+  [HttpGet("{id:guid}")]
+  public async Task<IActionResult> GetEmployeeById(Guid id)
   {
-    Employee? employee = _dbContext.Employees.Find(id);
+    Employee? employee = await _dbContext.Employees.FindAsync(id);
 
     if (employee is null)
     {
@@ -39,7 +38,7 @@ public class EmployeesController : ControllerBase
   }
 
   [HttpPost]
-  public IActionResult AddEmployee(AddEmployeeDto addEmployeeDto)
+  public async Task<IActionResult> AddEmployee(AddEmployeeDto addEmployeeDto)
   {
     var employeeEntity = new Employee()
     {
@@ -49,17 +48,16 @@ public class EmployeesController : ControllerBase
       Salary = addEmployeeDto.Salary
     };
 
-    _dbContext.Employees.Add(employeeEntity);
-    _dbContext.SaveChanges();
+    await _dbContext.Employees.AddAsync(employeeEntity);
+    await _dbContext.SaveChangesAsync();
 
     return Ok(employeeEntity);
   }
 
-  [HttpPut]
-  [Route("{id:guid}")]
-  public IActionResult UpdateEmployee(Guid id, UpdateEmployeeDto updateEmployeeDto)
+  [HttpPut("{id:guid}")]
+  public async Task<IActionResult> UpdateEmployee(Guid id, UpdateEmployeeDto updateEmployeeDto)
   {
-    Employee? employee = _dbContext.Employees.Find(id);
+    Employee? employee = await _dbContext.Employees.FindAsync(id);
 
     if (employee is null)
     {
@@ -71,16 +69,15 @@ public class EmployeesController : ControllerBase
     employee.Phone = updateEmployeeDto.Phone;
     employee.Salary = updateEmployeeDto.Salary;
 
-    _dbContext.SaveChanges();
+    await _dbContext.SaveChangesAsync();
 
     return Ok(employee);
   }
 
-  [HttpDelete]
-  [Route("{id:guid}")]
-  public IActionResult DeleteEmployee(Guid id)
+  [HttpDelete("{id:guid}")]
+  public async Task<IActionResult> DeleteEmployee(Guid id)
   {
-    Employee? employee = _dbContext.Employees.Find(id);
+    Employee? employee = await _dbContext.Employees.FindAsync(id);
 
     if (employee is null)
     {
@@ -88,7 +85,7 @@ public class EmployeesController : ControllerBase
     }
 
     _dbContext.Employees.Remove(employee);
-    _dbContext.SaveChanges();
+    await _dbContext.SaveChangesAsync();
 
     return Ok(employee);
   }
