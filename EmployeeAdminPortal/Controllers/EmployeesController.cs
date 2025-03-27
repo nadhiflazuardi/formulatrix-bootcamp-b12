@@ -12,19 +12,19 @@ namespace EmployeeAdminPortal.Controllers;
 [ApiController]
 public class EmployeesController : ControllerBase
 {
-  private readonly ApplicationDbContext _dbContext;
+  private readonly IEmployeeRepository _employeeRepository;
   private readonly IMapper _mapper;
   private readonly IValidator<EmployeeCreateDTO> _createValidator;
   private readonly IValidator<EmployeeUpdateDTO> _updateValidator;
 
   public EmployeesController
   (
-    ApplicationDbContext dbContext,
-    IMapper mapper,
-    IValidator<EmployeeCreateDTO> createValidator,
-    IValidator<EmployeeUpdateDTO> updateValidator)
+      IEmployeeRepository employeeRepository,
+      IMapper mapper,
+      IValidator<EmployeeCreateDTO> createValidator,
+      IValidator<EmployeeUpdateDTO> updateValidator)
   {
-    _dbContext = dbContext;
+    _employeeRepository = employeeRepository;
     _mapper = mapper;
     _createValidator = createValidator;
     _updateValidator = updateValidator;
@@ -33,7 +33,7 @@ public class EmployeesController : ControllerBase
   [HttpGet]
   public async Task<ActionResult<List<EmployeeDTO>>> GetAllEmployees()
   {
-    List<Employee> allEmployees = await _dbContext.Employees.AsNoTracking().ToListAsync();
+    List<Employee> allEmployees = await _employeeRepository.GetAll();
     List<EmployeeDTO> employeeDTOs = _mapper.Map<List<EmployeeDTO>>(allEmployees);
     return Ok(employeeDTOs);
   }
@@ -41,15 +41,13 @@ public class EmployeesController : ControllerBase
   [HttpGet("{id:guid}")]
   public async Task<ActionResult> GetEmployeeById(Guid id)
   {
-    Employee? employee = await _dbContext.Employees.AsNoTracking().FirstAsync(employee => employee.Id == id);
-
+    Employee? employee = await _employeeRepository.GetById(id);
     if (employee is null)
     {
       return NotFound();
     }
 
     EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
-
     return Ok(employeeDTO);
   }
 
@@ -63,12 +61,9 @@ public class EmployeesController : ControllerBase
     }
 
     Employee employee = _mapper.Map<Employee>(employeeCreateDTO);
-
-    await _dbContext.Employees.AddAsync(employee);
-    await _dbContext.SaveChangesAsync();
+    await _employeeRepository.Add(employee);
 
     EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
-
     return Ok(employeeDTO);
   }
 
@@ -80,18 +75,15 @@ public class EmployeesController : ControllerBase
     {
       return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
     }
-    
-    Employee? employee = await _dbContext.Employees.FirstAsync(employee => employee.Id == id);
 
-    if (employee is null)
+    Employee? existingEmployee = await _employeeRepository.GetById(id);
+    if (existingEmployee is null)
     {
       return NotFound();
     }
 
-    _mapper.Map(employeeUpdateDTO, employee);
-    await _dbContext.SaveChangesAsync();
-
-    EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
+    _mapper.Map(employeeUpdateDTO, existingEmployee);
+    await _employeeRepository.Update(existingEmployee);
 
     return Accepted();
   }
@@ -99,16 +91,14 @@ public class EmployeesController : ControllerBase
   [HttpDelete("{id:guid}")]
   public async Task<ActionResult> DeleteEmployee(Guid id)
   {
-    Employee? employee = await _dbContext.Employees.AsNoTracking().FirstAsync(employee => employee.Id == id);
-
+    Employee? employee = await _employeeRepository.GetById(id);
     if (employee is null)
     {
       return NotFound();
     }
 
-    _dbContext.Employees.Remove(employee);
-    await _dbContext.SaveChangesAsync();
-
+    await _employeeRepository.Delete(id);
     return NoContent();
   }
 }
+

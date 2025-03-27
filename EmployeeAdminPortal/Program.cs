@@ -15,8 +15,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddValidatorsFromAssemblyContaining<EmployeeCreateDTOValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<EmployeeUpdateDTOValidator>();
+builder.Services.AddScoped<IValidator<EmployeeCreateDTO>, EmployeeCreateDTOValidator>();
+builder.Services.AddScoped<IValidator<EmployeeUpdateDTO>, EmployeeUpdateDTOValidator>();
+
 builder.Services.AddFluentValidationAutoValidation(); 
 builder.Services.AddFluentValidationClientsideAdapters();
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+// builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
