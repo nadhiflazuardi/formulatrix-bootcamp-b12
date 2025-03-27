@@ -13,7 +13,7 @@ public class AuthController : ControllerBase
   }
 
   [HttpPost("login")]
-  public IActionResult Login([FromBody] User user)
+  public IActionResult Login(User user)
   {
     if (user.Username == "admin" && user.Password == "password") // Replace with real user validation
     {
