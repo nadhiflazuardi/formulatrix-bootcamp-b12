@@ -4,6 +4,7 @@ using EmployeeAdminPortal.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using FluentValidation;
 
 namespace EmployeeAdminPortal.Controllers;
 
@@ -13,11 +14,20 @@ public class EmployeesController : ControllerBase
 {
   private readonly ApplicationDbContext _dbContext;
   private readonly IMapper _mapper;
+  private readonly IValidator<EmployeeCreateDTO> _createValidator;
+  private readonly IValidator<EmployeeUpdateDTO> _updateValidator;
 
-  public EmployeesController(ApplicationDbContext dbContext, IMapper mapper)
+  public EmployeesController
+  (
+    ApplicationDbContext dbContext,
+    IMapper mapper,
+    IValidator<EmployeeCreateDTO> createValidator,
+    IValidator<EmployeeUpdateDTO> updateValidator)
   {
     _dbContext = dbContext;
     _mapper = mapper;
+    _createValidator = createValidator;
+    _updateValidator = updateValidator;
   }
 
   [HttpGet]
@@ -46,6 +56,12 @@ public class EmployeesController : ControllerBase
   [HttpPost]
   public async Task<ActionResult> AddEmployee(EmployeeCreateDTO employeeCreateDTO)
   {
+    var validationResult = await _createValidator.ValidateAsync(employeeCreateDTO);
+    if (!validationResult.IsValid)
+    {
+      return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+    }
+
     Employee employee = _mapper.Map<Employee>(employeeCreateDTO);
 
     await _dbContext.Employees.AddAsync(employee);
@@ -59,6 +75,12 @@ public class EmployeesController : ControllerBase
   [HttpPut("{id:guid}")]
   public async Task<ActionResult> UpdateEmployee(Guid id, EmployeeUpdateDTO employeeUpdateDTO)
   {
+    var validationResult = await _updateValidator.ValidateAsync(employeeUpdateDTO);
+    if (!validationResult.IsValid)
+    {
+      return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+    }
+    
     Employee? employee = await _dbContext.Employees.FirstAsync(employee => employee.Id == id);
 
     if (employee is null)
@@ -87,6 +109,6 @@ public class EmployeesController : ControllerBase
     _dbContext.Employees.Remove(employee);
     await _dbContext.SaveChangesAsync();
 
-    return NoContent ();
+    return NoContent();
   }
 }

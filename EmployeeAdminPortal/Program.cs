@@ -13,7 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddValidatorsFromAssemblyContaining<EmployeeValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<EmployeeCreateDTOValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<EmployeeUpdateDTOValidator>();
 builder.Services.AddFluentValidationAutoValidation(); 
 builder.Services.AddFluentValidationClientsideAdapters();
 
