@@ -1,3 +1,4 @@
+using EmployeeAdminPortal.MappingProfiles;
 using EmployeeAdminPortal.Models;
 using EmployeeAdminPortal.Repository;
 using EmployeeAdminPortal.Validators;
@@ -13,8 +14,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddValidatorsFromAssemblyContaining<EmployeeValidator>();
-builder.Services.AddFluentValidationAutoValidation();  // Enables automatic validation
-builder.Services.AddFluentValidationClientsideAdapters();  // Enables client-side validation
+builder.Services.AddFluentValidationAutoValidation(); 
+builder.Services.AddFluentValidationClientsideAdapters();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 
 builder.Services.AddDbContext<ApplicationDbContext>
 (
