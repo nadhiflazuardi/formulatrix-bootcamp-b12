@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmployeeAdminPortal.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class EmployeesController : ControllerBase
 {
   private readonly IEmployeeRepository _employeeRepository;
