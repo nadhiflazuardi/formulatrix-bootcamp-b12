@@ -56,10 +56,9 @@ public class EmployeesController : ControllerBase
   [HttpPost]
   public async Task<ActionResult> AddEmployee(EmployeeCreateDTO employeeCreateDTO)
   {
-    var validationResult = await _createValidator.ValidateAsync(employeeCreateDTO);
-    if (!validationResult.IsValid)
+    if (!ModelState.IsValid)
     {
-      return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+      return BadRequest(ModelState);
     }
 
     Employee employee = _mapper.Map<Employee>(employeeCreateDTO);
@@ -72,10 +71,9 @@ public class EmployeesController : ControllerBase
   [HttpPut("{id:guid}")]
   public async Task<ActionResult> UpdateEmployee(Guid id, EmployeeUpdateDTO employeeUpdateDTO)
   {
-    var validationResult = await _updateValidator.ValidateAsync(employeeUpdateDTO);
-    if (!validationResult.IsValid)
+    if (!ModelState.IsValid)
     {
-      return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+      return BadRequest(ModelState);
     }
 
     Employee? existingEmployee = await _employeeRepository.GetById(id);

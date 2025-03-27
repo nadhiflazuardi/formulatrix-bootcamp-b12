@@ -74,10 +74,8 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddValidatorsFromAssemblyContaining<EmployeeCreateDTOValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<EmployeeUpdateDTOValidator>();
-builder.Services.AddScoped<IValidator<EmployeeCreateDTO>, EmployeeCreateDTOValidator>();
-builder.Services.AddScoped<IValidator<EmployeeUpdateDTO>, EmployeeUpdateDTOValidator>();
 
-builder.Services.AddFluentValidationAutoValidation(); 
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
@@ -85,7 +83,6 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
 
 builder.Services.AddDbContext<ApplicationDbContext>
 (
@@ -103,7 +100,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();  
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
