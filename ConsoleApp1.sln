@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnNuget", "LearnNuget\Le
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeAdminPortal", "EmployeeAdminPortal\EmployeeAdminPortal.csproj", "{8F81E68B-F444-4E41-8CDA-83F096A49B61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyPattern", "ProxyPattern\ProxyPattern.csproj", "{6F2A26F6-E536-4483-AA2C-764CCAB249A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -242,6 +244,10 @@ Global
 		{8F81E68B-F444-4E41-8CDA-83F096A49B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F81E68B-F444-4E41-8CDA-83F096A49B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F81E68B-F444-4E41-8CDA-83F096A49B61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F2A26F6-E536-4483-AA2C-764CCAB249A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F2A26F6-E536-4483-AA2C-764CCAB249A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F2A26F6-E536-4483-AA2C-764CCAB249A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F2A26F6-E536-4483-AA2C-764CCAB249A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1F9BDA6B-0D21-40BA-BA7A-F3820590473A} = {85F0B5E8-0692-4885-91FF-75D52CD47993}
